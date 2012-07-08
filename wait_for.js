@@ -1,4 +1,4 @@
-// TOFO make code pretty
+// TODO make code pretty
 /*global mmcore:true*/
 function wait_for (condition, callback, timeout, interval, on_fail) {
 	var control;
