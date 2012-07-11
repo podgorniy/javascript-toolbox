@@ -35,7 +35,9 @@ function iterate(list, func) {
 	} else {
 		res = {};
 		for (i in list) {
-			res[i] = func.call(list, list[i], i);
+			if (list.hasOwnProperty(i)) {
+				res[i] = func.call(list, list[i], i);
+			}
 		}
 	}
 	return res;
