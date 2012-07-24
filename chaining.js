@@ -65,7 +65,7 @@ function on_all_async_ready () {
 }
 
 var on_2_of_3_ready = function () {
-    console.info('1 an 2 ready');
+    console.info('1 and 2 ready');
 }
 
 var async_1 = chain(function () {
