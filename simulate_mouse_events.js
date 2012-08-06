@@ -1,4 +1,4 @@
-function simulateMouseEvent (node, mouseEvent) {
+function simulate_mouse_events (node, mouseEvent) {
 	var options,
 		oEvent;
 
