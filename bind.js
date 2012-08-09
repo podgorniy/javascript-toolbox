@@ -1,4 +1,4 @@
-function bind (obj, eventName, handler) {
+function bind (obj, event_name, handler) {
 	var handler_wrapper = function (event) {
 		event = event || window.event;
 		if (event.srcElement) {
@@ -8,9 +8,9 @@ function bind (obj, eventName, handler) {
 	};
 
 	if (obj.addEventListener) {
-		obj.addEventListener(eventName, handler_wrapper, false);
+		obj.addEventListener(event_name, handler_wrapper, false);
 	} else if (obj.attachEvent) {
-		obj.attachEvent('on' + eventName, handler_wrapper);
+		obj.attachEvent('on' + event_name, handler_wrapper);
 	}
 	return handler_wrapper;
 }
