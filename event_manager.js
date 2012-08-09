@@ -144,6 +144,10 @@ var event_manager = (function () {
 					bindings[event_name].handlers[selector].splice(handler_index, 1);
 					if (!bindings[event_name].handlers[selector].length) {
 						delete bindings[event_name].handlers[selector];
+						if (is_empty_object(bindings[event_name].handlers)) {
+							unbind(document, event_name, bindings[event_name].super_handler);
+							delete bindings[event_name];
+						}
 					}
 				}
 			}
