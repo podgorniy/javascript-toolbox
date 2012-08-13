@@ -1,6 +1,6 @@
 /*
-	lite version
-	Ass function before or after another
+	Small version
+	Adds function before or after another
 */
 function decorate (initial, decorate_before, decorate_after) {
 	return function () {
@@ -51,7 +51,7 @@ function decorate (initial, decorate_before, decorate_after) {
 		if (typeof decorate_after === 'function') {
 			updated_result = decorate_after.apply(this, arguments);
 		}
-		return updated_result || initial_call_result;
+		return updated_result === undefined ? initial_call_result : updated_result;
 	};
 }
 /*
