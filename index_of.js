@@ -1,12 +1,15 @@
-function index_of (arr, obj) {
-	var i;
+function index_of (arr, el) {
+	var io,
+		i;
 
-	if (arr.indexOf) {
-		return arr.indexOf(obj);
+	io = Array.prototype.indexOf;
+	if (io) {
+		return io.call(arr, el);
 	} else {
 		for (i = 0; i < arr.length; i += 1) {
-			if (arr[i] === obj) return i;
+			if (el === arr[i]) {
+				return i;
+			}
 		}
 	}
-	return - 1;
 }
