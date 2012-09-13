@@ -6,14 +6,14 @@ iterate_async(arr, function (el, index, arr) {
 }, 99);
 */
 function iterate_async (arr, callback, timeout) {
-	var item_to_proceed;
+	var index_of_processing_item;
 
-	item_to_proceed = 0;
+	index_of_processing_item = 0;
 	(function proceed_next () {
-		if (item_to_proceed < arr.length) {
+		if (index_of_processing_item < arr.length) {
 			setTimeout(function () {
-				callback.call(arr, arr[item_to_proceed], item_to_proceed, arr);
-				item_to_proceed += 1;
+				callback.call(arr, arr[index_of_processing_item], index_of_processing_item, arr);
+				index_of_processing_item += 1;
 				proceed_next();
 			}, timeout || 50);
 		}
