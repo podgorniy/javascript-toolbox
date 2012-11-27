@@ -3,7 +3,6 @@ function planned (func, delay) {
 	var was_planned,
 		timer;
 
-	was_planned = false;
 	return function () {
 		if (!was_planned) {
 			timer = setTimeout(function () {
