@@ -2,12 +2,12 @@ function compose() {
 	var composed;
 
 	composed = arguments;
-	return function() {
+	return function(arg) {
 		var res;
 
-		res = arguments;
+		res = arg;
 		for (var i = 0; i < composed.length; i += 1) {
-			res = composed.apply(this, res);
+			res = composed[i].call(this, res);
 		}
 		return res;
 	};
