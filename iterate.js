@@ -27,7 +27,7 @@ processed = iterate(data, function (val, i) {
 function iterate(list, func) {
 	var i, res;
 
-	if ( 'length' in list ) {
+	if ('length' in list && typeof list !== 'function') {
 		res = [];
 		for (i = 0; i < list.length; i += 1) {
 			res.push(func.call(list, list[i], i));
