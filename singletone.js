@@ -1,5 +1,5 @@
 /**
- * Buletproof singletone constructor. Can be used with or 
+ * Bulletproof singletone constructor. Can be used with or 
  * without new, can be called from whatever (object method,
  * standalone function). Works fine in strict mode
  */
