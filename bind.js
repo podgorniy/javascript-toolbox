@@ -1,7 +1,7 @@
 function bind (obj, event_name, handler) {
 	var handler_wrapper = function (event) {
 		event = event || window.event;
-		if (event.srcElement) {
+		if (!event.target && event.srcElement) {
 			event.target = event.srcElement;
 		}
 		return handler.call(obj, event);
