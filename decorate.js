@@ -101,3 +101,36 @@ function decorate (initial, decorate_before, decorate_after) {
 		}
 	});
 */
+
+
+function decorate (func, before, after) {
+	var res;
+	var key;
+
+	res = function () {
+		var temp_res;
+		var alternative_args;
+		var alternative_res;
+
+		if (typeof before === 'function') {
+			before.apply(this, arguments);
+		}
+
+		temp_res = func.apply(this, arguments);
+
+		if (typeof after === 'function') {
+			after.apply(this, arguments);
+		}
+		return temp_res;
+	}
+
+	res.prototype = func.prototype;
+
+	for (key in func) {
+		if (func.hasOwnProperty(key)) {
+			res[key] = func[key];
+		}
+	}
+
+	return res;
+}
