@@ -1,37 +1,38 @@
-var mediator = (function() {
+var mediator = (function () {
 	'use strict';
-
-	var handlers;
 	var events;
 
-	handlers = [];
-	events = [];
+	events = {};
 	return {
-		subscribe: function(event_name, handler) {
-			var event_index;
-
-			event_index = events.indexOf(event_name);
-			if(event_index === -1) {
-				event_index = (events.push(event_name) - 1);
+		subscribe : function (event_name, callback) {
+			if (!events[event_name]) {
+				events[event_name] = [];
 			}
-
-			if(!handlers[event_index]) {
-				handlers[event_index] = [];
-			}
-			handlers[event_index].push(handler);
+			events[event_name].push(callback);
 		},
-		publish: function(event_name, data) {
-			var event_index;
+
+		unsubscribe : function (event_name, callback_) {
+			if (arguments.length === 1) {
+				delete events[event_name];
+			} else {
+				if (events[event_name]) {
+					events[event_name] = events[event_name].filter(function (callback) {
+						return callback !== callback_;
+					});
+				}
+			}
+		},
+
+		publish : function (event_name, data) {
+			var callbacks;
 			var i;
 
-			event_index = events.indexOf(event_name);
-			if(event_index === -1) {
-				return false;
-			} else {
-				handlers[event_index].forEach(function(handler) {
-					handler(data, event_name);
-				});
+			callbacks = events[event_name];
+			if (callbacks && callbacks.length) {
+				for (i = 0; i < callbacks.length; i += 1) {
+					callbacks[i].call(undefined, data);
+				}
 			}
 		}
-	};
+	}
 }());
