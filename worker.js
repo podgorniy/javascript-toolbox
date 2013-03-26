@@ -16,6 +16,7 @@ var worker = (function () {
 	// async iterator on functions stack
 	function processStack () {
 		var thisMoment;
+		var funcArgsPair;
 
 		thisMoment = now();
 		sinseLastCall = thisMoment - lastCall;
@@ -28,7 +29,8 @@ var worker = (function () {
 			lastCall = thisMoment;
 
 			// process first item
-			stack.shift()();
+			funcArgsPair = stack.shift()();
+			funcArgsPair.func.apply(window, funcArgsPair.args);
 
 			// plan next process tick
 			// we plan it anyway, in case, new function will
@@ -41,8 +43,15 @@ var worker = (function () {
 		return new Date().getTime();
 	}
 
-	return function (func) {
-		stack.push(func);
+	function isIsArrayLike (obj) {
+		return length in obj && typeof obj !== 'function';
+	}
+
+	return function (func, args) {
+		stack.push({
+			func : func,
+			args : isIsArrayLike(args) ? args : [args]
+		});
 		processStack();
 	};
 }());
